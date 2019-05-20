@@ -1,7 +1,15 @@
 package exercises;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class MurderOfCrows {
 
@@ -15,33 +23,88 @@ public class MurderOfCrows {
 
 	private void findTheDiamond() {
 
-		int deadCrows = 0;
+		try {
 
-		for (int i = 0; i < theMurder.size(); i++) {
+			playCrows();
+			JOptionPane.showMessageDialog(null, "Some crow had eaten the diamond, we need get it back.");
 
-			if (theMurder.get(i).getStomachContents().contains("diamond")) {
+			JLabel label1 = new JLabel("Choose your tool:", JLabel.CENTER);
+			JLabel label2 = new JLabel("Good choice!", JLabel.CENTER);
+			String[] options = new String[] { "butchers knife", "an axe" };
+			String[] grab = new String[] { "grab a crow!" };
 
-				System.out.println("Found the diamond, it was in " + theMurder.get(i).toString() + "'s stomach.");
-				deadCrows++;
-				System.out.println((theMurder.get(i)).toString() + " " + "is now dead.");
-				if (deadCrows == 1) {
-				System.out.println("In total we had to kill " + deadCrows + " crow.");
-				} else {
-					System.out.println("In total we had to kill " + deadCrows + " crows.");
-				}
-				break;
-			} else {
-				System.out.println((theMurder.get(i)).toString() + " " + "is dead.");
-				deadCrows++;
+			JOptionPane.showOptionDialog(null, label1, null, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+					null, options, options[0]);
+			playSharpen();
+			JOptionPane.showOptionDialog(null, label2, null, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+					null, grab, options[0]);
+
+			try {
+				Thread.sleep(5000);
+			} catch (Exception ex) {
+				ex.printStackTrace();
 			}
 
-		}
-		/*
-		 * 1. One of the Crows has eaten the diamond. You need to search through the
-		 * stomach of each Crow, then print the name of the guilty Crow.
-		 */
+			int deadCrows = 0;
 
-		/* 2. How many innocent crows had to die before the diamond was found? */
+			for (int i = 0; i < theMurder.size(); i++) {
+
+				if (theMurder.get(i).getStomachContents().contains("diamond")) {
+
+					playChopChop();
+					JOptionPane.showMessageDialog(null,
+							"Found the diamond! It was in " + theMurder.get(i).toString() + "'s stomach.");
+					deadCrows++;
+
+					JOptionPane.showMessageDialog(null, "And now, his watch has ended.");
+					if (deadCrows == 1) {
+						JOptionPane.showMessageDialog(null, "In total we had to kill " + deadCrows + " crow.");
+					} else {
+						JOptionPane.showMessageDialog(null, "In total we had to kill " + deadCrows + " crows.");
+					}
+					break;
+				} else {
+					playChopChop();
+					JOptionPane.showMessageDialog(null, ("No diamond here. " + theMurder.get(i)).toString() + " "
+							+ "is now dead in pieces. Chop another one?");
+					deadCrows++;
+
+				}
+
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "You are weak.");
+			e.printStackTrace();
+		}
+
+	}
+
+	public void playNoise(String soundFile) {
+		try {
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundFile));
+			Clip clip = AudioSystem.getClip();
+			clip.open(audioInputStream);
+			clip.start();
+			Thread.sleep(3400);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	String sharpenFile = "sound/sharpen.wav";
+	String chopChopFile = "sound/chopchop.wav";
+	String crowsFile = "sound/crows.wav";
+
+	void playSharpen() {
+		playNoise(sharpenFile);
+	}
+
+	void playChopChop() {
+		playNoise(chopChopFile);
+	}
+
+	void playCrows() {
+		playNoise(crowsFile);
 	}
 
 	private void initializeCrows() {
