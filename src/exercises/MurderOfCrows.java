@@ -16,65 +16,61 @@ public class MurderOfCrows {
 	ArrayList<Crow> theMurder = new ArrayList<Crow>();
 
 	public static void main(String[] args) {
+
 		MurderOfCrows murderOfCrows = new MurderOfCrows();
 		murderOfCrows.initializeCrows();
 		murderOfCrows.findTheDiamond();
+
 	}
 
 	private void findTheDiamond() {
 
+		playCrows();
+		JOptionPane.showMessageDialog(null, "Some crow had eaten the diamond, we need get it back.");
+
+		JLabel label1 = new JLabel("Choose your tool:", JLabel.CENTER);
+		JLabel label2 = new JLabel("Good choice!", JLabel.CENTER);
+		String[] options = new String[] { "butchers knife", "an axe" };
+		String[] grab = new String[] { "grab a crow!" };
+
+		JOptionPane.showOptionDialog(null, label1, null, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
+				options, options[0]);
+		playSharpen();
+		JOptionPane.showOptionDialog(null, label2, null, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null,
+				grab, options[0]);
+
 		try {
+			Thread.sleep(5000);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 
-			playCrows();
-			JOptionPane.showMessageDialog(null, "Some crow had eaten the diamond, we need get it back.");
+		int deadCrows = 0;
 
-			JLabel label1 = new JLabel("Choose your tool:", JLabel.CENTER);
-			JLabel label2 = new JLabel("Good choice!", JLabel.CENTER);
-			String[] options = new String[] { "butchers knife", "an axe" };
-			String[] grab = new String[] { "grab a crow!" };
+		for (int i = 0; i < theMurder.size(); i++) {
 
-			JOptionPane.showOptionDialog(null, label1, null, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
-					null, options, options[0]);
-			playSharpen();
-			JOptionPane.showOptionDialog(null, label2, null, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
-					null, grab, options[0]);
+			if (theMurder.get(i).getStomachContents().contains("diamond")) {
 
-			try {
-				Thread.sleep(5000);
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
+				playChopChop();
+				JOptionPane.showMessageDialog(null,
+						"Found the diamond! It was in " + theMurder.get(i).toString() + "'s stomach.");
+				deadCrows++;
 
-			int deadCrows = 0;
-
-			for (int i = 0; i < theMurder.size(); i++) {
-
-				if (theMurder.get(i).getStomachContents().contains("diamond")) {
-
-					playChopChop();
-					JOptionPane.showMessageDialog(null,
-							"Found the diamond! It was in " + theMurder.get(i).toString() + "'s stomach.");
-					deadCrows++;
-
-					JOptionPane.showMessageDialog(null, "And now, his watch has ended.");
-					if (deadCrows == 1) {
-						JOptionPane.showMessageDialog(null, "In total we had to kill " + deadCrows + " crow.");
-					} else {
-						JOptionPane.showMessageDialog(null, "In total we had to kill " + deadCrows + " crows.");
-					}
-					break;
+				JOptionPane.showMessageDialog(null, "And now, his watch has ended.");
+				if (deadCrows == 1) {
+					JOptionPane.showMessageDialog(null, "In total we had to kill " + deadCrows + " crow.");
 				} else {
-					playChopChop();
-					JOptionPane.showMessageDialog(null, ("No diamond here. " + theMurder.get(i)).toString() + " "
-							+ "is now dead in pieces. Chop another one?");
-					deadCrows++;
-
+					JOptionPane.showMessageDialog(null, "In total we had to kill " + deadCrows + " crows.");
 				}
+				break;
+			} else {
+				playChopChop();
+				JOptionPane.showMessageDialog(null, ("No diamond here. " + theMurder.get(i)).toString() + " "
+						+ "is now dead in pieces. Chop another one?");
+				deadCrows++;
 
 			}
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "You are weak.");
-			e.printStackTrace();
+
 		}
 
 	}
