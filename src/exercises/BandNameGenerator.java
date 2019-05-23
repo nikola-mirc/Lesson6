@@ -22,12 +22,14 @@ public class BandNameGenerator {
 		adjectives.add("frozen");
 		adjectives.add("random");
 		adjectives.add("bloody");
+		adjectives.add("homicidal");
 
 		nouns.add("pants");
 		nouns.add("bones");
-		nouns.add("bike");
+		nouns.add("bikers");
 		nouns.add("refrigerator");
 		nouns.add("planet");
+		nouns.add("berserkers");
 
 		int size1 = 0;
 		int size2 = 0;
