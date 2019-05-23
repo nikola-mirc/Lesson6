@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class ArrayManipulation {
 	Random random = new Random();
-	
+
 //	@Test
 //	public void testSortAnArray() throws Exception {
 //
@@ -164,5 +164,3 @@ public class ArrayManipulation {
 //	}
 
 }
-
-

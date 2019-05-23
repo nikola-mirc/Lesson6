@@ -3,13 +3,6 @@ package exercises;
 import java.util.ArrayList;
 import java.util.Random;
 
-/* 
- * Make 2 ArrayLists; 
- *      1 full of adjectives (e.g. slimy, blind)
- *      1 full of plural nouns (e.g. pants, bones)
- *      
- * When the program is run, one word is randomly selected from each list to generate a band name.
-*/
 public class BandNameGenerator {
 
 	public static void main(String[] args) {
@@ -45,7 +38,6 @@ public class BandNameGenerator {
 		}
 
 		Random r = new Random();
-		
 
 		for (int i = 0; i < 66; i++) {
 

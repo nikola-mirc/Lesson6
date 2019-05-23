@@ -96,9 +96,11 @@ public class ArrayListQuiz extends TestCase {
 //		testList.add("6");
 //		assertEquals("666",  LearningArrayLists.addAllString(testList));
 //	}
-	
-	/* now do this puzzle: http://apcomputersciencetutoring.com/exam-review/candidatepool-free-response-practice-question/ */
-	
+
+	/*
+	 * now do this puzzle:
+	 * http://apcomputersciencetutoring.com/exam-review/candidatepool-free-response-
+	 * practice-question/
+	 */
+
 }
-
-
